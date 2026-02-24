@@ -30,7 +30,7 @@ const Login = () => {
       navigate("/dashboard");
 
     } catch (error) {
-      alert(error.response?.data?.message || "Login failed");
+      alert(error.response?.data?.message || "User not found, please register");
     }
   };
 
