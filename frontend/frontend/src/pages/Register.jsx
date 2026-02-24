@@ -11,6 +11,8 @@ const Register = () => {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -27,8 +29,11 @@ const Register = () => {
         formData
       );
 
-      localStorage.setItem("token", res.data.token);
-      navigate("/dashboard");
+      // Show success message (optional)
+      alert(res.data.message || "Registration successful!");
+
+      // Redirect to login page
+      navigate("/login");
 
     } catch (error) {
       alert(error.response?.data?.message || "Registration failed");
@@ -37,15 +42,12 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-600 to-blue-500 px-4">
-      
       <div className="bg-white w-full max-w-md p-8 rounded-2xl shadow-xl border">
-
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Create Account 🚀
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-
           {/* Name */}
           <div>
             <label className="block text-gray-600 mb-1">Name</label>
@@ -85,12 +87,15 @@ const Register = () => {
             />
           </div>
 
-          {/* Button */}
+          {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg font-semibold transition duration-300"
+            disabled={loading}
+            className={`w-full bg-indigo-600 hover:bg-indigo-700 text-white cursor-pointer py-2 rounded-lg font-semibold transition duration-300 ${
+              loading ? "opacity-70 cursor-not-allowed" : ""
+            }`}
           >
-            Register
+            {loading ? "Processing..." : "Register"}
           </button>
         </form>
 
@@ -104,7 +109,6 @@ const Register = () => {
             Login
           </Link>
         </p>
-
       </div>
     </div>
   );

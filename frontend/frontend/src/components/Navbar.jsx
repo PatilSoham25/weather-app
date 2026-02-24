@@ -111,7 +111,7 @@ const Navbar = () => {
                     handleLogout();
                     setIsOpen(false);
                   }}
-                  className="w-full text-red-400 hover:text-red-500 transition"
+                  className="w-full text-red-400 hover:text-red-500 cursor-pointer transition"
                 >
                   Logout
                 </button>
